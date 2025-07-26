@@ -18,6 +18,8 @@ services:
     container_name: influxdb
     networks:
       - solar_net
+    ports:
+      - 10002:8086
     volumes:
       - influxdb-data:/var/lib/influxdb3
     environment:
