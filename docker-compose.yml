@@ -47,7 +47,7 @@ services:
     networks:
       - solar_net
     ports:
-      - "3000:10000"
+      - "10000:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=supersecretpassword
@@ -65,7 +65,7 @@ services:
     networks:
       - solar_net
     ports:
-      - "10000:10001"
+      - "10001:10000"
     environment:
       - LOGLEVEL=info
       - MQTT_BROKER_URL=mqtt://mosquitto:1883
