@@ -1,0 +1,3 @@
+[submodule "deye-microinverter-cloud-free"]
+	path = deye-microinverter-cloud-free
+	url = https://github.com/Hypfer/deye-microinverter-cloud-free.git

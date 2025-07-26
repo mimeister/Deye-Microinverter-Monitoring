@@ -1,0 +1,78 @@
+networks:
+  solar_net:
+    driver: bridge
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    networks:
+      - solar_net
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+    restart: unless-stopped
+
+  influxdb:
+    image: influxdb:2.7
+    container_name: influxdb
+    networks:
+      - solar_net
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin123
+      - DOCKER_INFLUXDB_INIT_ORG=solarorg
+      - DOCKER_INFLUXDB_INIT_BUCKET=solar
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=supersecrettoken
+    restart: unless-stopped
+
+  telegraf:
+    image: telegraf:latest
+    container_name: telegraf
+    networks:
+      - solar_net
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - influxdb
+      - mosquitto
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana-oss
+    container_name: grafana
+    networks:
+      - solar_net
+    ports:
+      - "3000:10000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=supersecretpassword
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    depends_on:
+      - influxdb
+    restart: unless-stopped
+
+  deye-dummycloud:
+    build:
+      context: ./deye-microinverter-cloud-free/dummycloud/
+      dockerfile: Dockerfile
+    container_name: deye_dummycloud
+    networks:
+      - solar_net
+    ports:
+      - "10000:10001"
+    environment:
+      - LOGLEVEL=info
+      - MQTT_BROKER_URL=mqtt://mosquitto:1883
+    depends_on:
+      - mosquitto
+    restart: unless-stopped
+
+volumes:
+  influxdb-data:
+  grafana-storage:
