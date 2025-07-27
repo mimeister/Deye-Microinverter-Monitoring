@@ -784,11 +784,186 @@
             "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 4,
+            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
             "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 4,
+        "y": 11
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.0",
+      "targets": [
+        {
+          "alias": "Grid",
+          "groupBy": [],
+          "measurement": "deye-inverter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "kWh_today"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "Class::tag",
+              "operator": "=",
+              "value": "grid"
+            }
+          ]
+        },
+        {
+          "alias": "PV1",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "det3d2m605r0ge"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "deye-inverter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "kWh_today"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "Class::tag",
+              "operator": "=",
+              "value": "pv1"
+            }
+          ]
+        },
+        {
+          "alias": "PV2",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "det3d2m605r0ge"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "deye-inverter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "kWh_today"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "Class::tag",
+              "operator": "=",
+              "value": "pv2"
+            }
+          ]
+        }
+      ],
+      "title": "Energy Today",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "det3d2m605r0ge"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -818,7 +993,7 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": "/I -.*/"
+              "options": "/Current -.*/"
             },
             "properties": [
               {
@@ -849,7 +1024,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "I - PV1"
+              "options": "Current - PV1"
             },
             "properties": [
               {
@@ -864,7 +1039,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "I - PV2"
+              "options": "Current - PV2"
             },
             "properties": [
               {
@@ -882,7 +1057,7 @@
         "h": 10,
         "w": 20,
         "x": 4,
-        "y": 11
+        "y": 19
       },
       "id": 7,
       "options": {
@@ -901,7 +1076,7 @@
       "pluginVersion": "12.1.0",
       "targets": [
         {
-          "alias": "V - PV1",
+          "alias": "Voltage - PV1",
           "groupBy": [],
           "measurement": "deye-inverter",
           "orderByTime": "ASC",
@@ -927,7 +1102,7 @@
           ]
         },
         {
-          "alias": "V - PV2",
+          "alias": "Voltage - PV2",
           "datasource": {
             "type": "influxdb",
             "uid": "det3d2m605r0ge"
@@ -958,7 +1133,7 @@
           ]
         },
         {
-          "alias": "I - PV1",
+          "alias": "Current - PV1",
           "datasource": {
             "type": "influxdb",
             "uid": "det3d2m605r0ge"
@@ -989,7 +1164,7 @@
           ]
         },
         {
-          "alias": "I - PV2",
+          "alias": "Current - PV2",
           "datasource": {
             "type": "influxdb",
             "uid": "det3d2m605r0ge"
@@ -1034,6 +1209,162 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PV2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PV1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 4,
+        "x": 0,
+        "y": 21
+      },
+      "hideTimeOverride": true,
+      "id": 11,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.0",
+      "targets": [
+        {
+          "alias": "PV1",
+          "groupBy": [],
+          "measurement": "deye-inverter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "kWh_today"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "Class::tag",
+              "operator": "=",
+              "value": "pv1"
+            }
+          ]
+        },
+        {
+          "alias": "PV2",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "det3d2m605r0ge"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "deye-inverter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "kWh_today"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "Class::tag",
+              "operator": "=",
+              "value": "pv2"
+            }
+          ]
+        }
+      ],
+      "timeFrom": "now/d",
+      "title": "Energy Proportion Today",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "det3d2m605r0ge"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic",
+            "seriesBy": "last"
+          },
+          "custom": {
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
@@ -1056,7 +1387,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1066,17 +1397,14 @@
               "mode": "off"
             }
           },
+          "fieldMinMax": false,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "blue",
                 "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -1102,6 +1430,21 @@
                 "value": 100
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Radiator Temperature"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1109,7 +1452,7 @@
         "h": 8,
         "w": 20,
         "x": 4,
-        "y": 21
+        "y": 29
       },
       "id": 8,
       "options": {
@@ -1187,6 +1530,161 @@
       ],
       "title": "Inverter Detail",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "det3d2m605r0ge"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PV2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PV1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 4,
+        "x": 0,
+        "y": 30
+      },
+      "hideTimeOverride": true,
+      "id": 12,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.0",
+      "targets": [
+        {
+          "alias": "PV1",
+          "groupBy": [],
+          "measurement": "deye-inverter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "kWh_total"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "Class::tag",
+              "operator": "=",
+              "value": "pv1"
+            }
+          ]
+        },
+        {
+          "alias": "PV2",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "det3d2m605r0ge"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "deye-inverter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "kWh_total"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "Class::tag",
+              "operator": "=",
+              "value": "pv2"
+            }
+          ]
+        }
+      ],
+      "timeFrom": "now-100y",
+      "title": "Energy Proportion Total",
+      "type": "piechart"
     },
     {
       "datasource": {
@@ -1277,7 +1775,7 @@
         "h": 8,
         "w": 20,
         "x": 4,
-        "y": 29
+        "y": 37
       },
       "id": 9,
       "options": {
@@ -1365,7 +1863,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {
@@ -1382,5 +1880,5 @@
   "timezone": "browser",
   "title": "PV Overview",
   "uid": "solar-overview",
-  "version": 27
+  "version": 31
 }
